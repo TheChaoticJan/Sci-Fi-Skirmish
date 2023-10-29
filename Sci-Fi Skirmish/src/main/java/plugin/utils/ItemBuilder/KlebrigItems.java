@@ -78,7 +78,7 @@ public class KlebrigItems {
         lore.add("");
         lore.add("§8• §7Lag lange in §x§5§A§D§D§2§DS§x§5§8§C§5§2§5c§x§5§7§A§C§1§Eh§x§5§5§9§4§1§6l§x§4§E§9§B§1§8e§x§4§7§A§3§1§Ai§x§4§0§A§A§1§Cm§7...");
         lore.add("   §8▸ §7Mit dem §x§5§A§D§D§2§DP§x§5§9§C§D§2§8e§x§5§8§B§D§2§3i§x§5§7§A§C§1§El§x§5§6§9§C§1§9s§x§5§3§9§6§1§7e§x§4§E§9§B§1§8n§x§4§9§A§0§1§9d§x§4§5§A§5§1§Be§x§4§0§A§A§1§Cr");
-        lore.add("     §7kannst du dich alle §a2 Minuten");
+        lore.add("     §7kannst du dich alle §a1:30 Minuten");
         lore.add("     §7in den §cGegner §7teleportieren");
         lore.add("     §7mit dem du gerade kämpfst!");
         lore.add("");

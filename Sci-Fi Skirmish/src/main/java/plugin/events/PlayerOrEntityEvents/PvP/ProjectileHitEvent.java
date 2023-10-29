@@ -10,7 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 import plugin.Main;
 import plugin.models.PlayerStats;
 import plugin.utils.CombatLogger;
-import plugin.utils.Infobar.Actionbar;
+import plugin.infobar.Actionbar;
 import plugin.utils.essentials.InventoryInteracts;
 
 import java.sql.SQLException;

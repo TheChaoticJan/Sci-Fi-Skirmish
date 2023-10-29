@@ -1,7 +1,5 @@
 package plugin.utils.InventoryBuilder;
 
-import plugin.utils.ItemBuilder.*;
-import plugin.utils.ItemBuilder.Inventarteile;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -9,23 +7,25 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import plugin.utils.ItemBuilder.*;
 
 public class SpecialItemInventory {
 
     public static Inventory inventory(Player p, String name){
         Inventory rezepte = Bukkit.createInventory(p,54 , name);
+        p.sendMessage(SciFiItems.Schwert().displayName());
 
         for(int i = 0; i <= 9; i++){
-            rezepte.setItem(i, Inventarteile.Glass());
+            rezepte.setItem(i, InventoryEssentials.glass());
         }
-        rezepte.setItem(17, Inventarteile.Glass());
-        rezepte.setItem(18, Inventarteile.Glass());
-        rezepte.setItem(26, Inventarteile.Glass());
-        rezepte.setItem(27, Inventarteile.Glass());
-        rezepte.setItem(35, Inventarteile.Glass());
-        rezepte.setItem(36, Inventarteile.Glass());
+        rezepte.setItem(17, InventoryEssentials.glass());
+        rezepte.setItem(18, InventoryEssentials.glass());
+        rezepte.setItem(26, InventoryEssentials.glass());
+        rezepte.setItem(27, InventoryEssentials.glass());
+        rezepte.setItem(35, InventoryEssentials.glass());
+        rezepte.setItem(36, InventoryEssentials.glass());
         for(int i2 = 44; i2 <= 53; i2++){
-            rezepte.setItem(i2, Inventarteile.Glass());
+            rezepte.setItem(i2, InventoryEssentials.glass());
         }
 
         //Sci-Fi

@@ -3,9 +3,9 @@ package plugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.plugin.java.JavaPlugin;
-import plugin.LootSystem.CrateEntities.CrateDeathEvent;
-import plugin.LootSystem.CrateEntities.CrateHitEvent;
-import plugin.LootSystem.CrateEntities.Crates;
+import plugin.cratesystem.CrateEntities.CrateDeathEvent;
+import plugin.cratesystem.CrateEntities.CrateHitEvent;
+import plugin.cratesystem.CrateEntities.Crates;
 import plugin.commands.DatabaseUsing.CrateStatsCommand;
 import plugin.commands.DatabaseUsing.PerkCommand;
 import plugin.commands.DatabaseUsing.TopCommand;
@@ -23,11 +23,12 @@ import plugin.commands.ModerationsCommands.InfoCommand;
 import plugin.commands.ModerationsCommands.InvseeCommand;
 import plugin.commands.ModerationsCommands.VanishCommand;
 import plugin.commands.QoLCommands.*;
-import plugin.db.Database;
+import plugin.database.Database;
 import plugin.events.BlockEvents.BlockEvents;
 import plugin.events.ExplosionEvents.ExplodeEvent;
 import plugin.events.InventoryEvents.ClickEvent;
 import plugin.events.InventoryEvents.InfobarClick;
+import plugin.events.InventoryEvents.PerkClickEvent;
 import plugin.events.InventoryEvents.Rezepte.RezeptClickEvent;
 import plugin.events.PlayerOrEntityEvents.Interactions.ChatEvent;
 import plugin.events.PlayerOrEntityEvents.Interactions.DropEvent;
@@ -37,7 +38,7 @@ import plugin.events.PlayerOrEntityEvents.PvP.PlayerDeathEvent;
 import plugin.events.PlayerOrEntityEvents.PvP.PlayerFishingEvent;
 import plugin.events.PlayerOrEntityEvents.PvP.PlayerGetHitEvent;
 import plugin.events.PlayerOrEntityEvents.PvP.ProjectileHitEvent;
-import plugin.utils.Infobar.InfobarCommand;
+import plugin.infobar.InfobarCommand;
 import plugin.utils.Recipes.Erfahrenrezepte;
 import plugin.utils.Recipes.ExplosivRezepte;
 import plugin.utils.Recipes.KlebrigRezepte;
@@ -76,13 +77,11 @@ public final class Main extends JavaPlugin{
             System.out.println("\u001B[31m Mögliche Quellen: Falsche Tabellen, Datenbank abgeschalten");
             e.printStackTrace();
         }
-        
                 getServer().getWorlds()
                         .forEach(world -> world.getEntitiesByClass(ArmorStand.class).stream()
                                 .filter(entity -> (Objects.equals(entity.getCustomName(), "§x§F§F§E§2§5§9N§x§F§F§D§E§5§8a§x§F§F§D§A§5§8c§x§F§F§D§5§5§7h§x§F§F§D§1§5§7s§x§F§F§C§D§5§6c§x§F§F§C§9§5§6h§x§F§F§C§5§5§5u§x§F§F§C§0§5§4b§x§F§F§B§C§5§4s§x§F§F§B§8§5§3k§x§F§F§B§4§5§3i§x§F§F§A§F§5§2s§x§F§F§A§B§5§2t§x§F§F§A§7§5§1e §8» §7???")))
                                 .forEach(Crates::startRotation)
                         );
-
 
         //Adding all Special Recipes (Sci-Fi, Erfahren, Klebrig & Explosiv)
         Bukkit.addRecipe(Erfahrenrezepte.Recipe1());
@@ -123,7 +122,7 @@ public final class Main extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new PlayerFishingEvent(), this);
         getServer().getPluginManager().registerEvents(new CrateHitEvent(), this);
         getServer().getPluginManager().registerEvents(new InfobarClick(this), this);
-
+        getServer().getPluginManager().registerEvents(new PerkClickEvent(this), this);
 
         //commands
         Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCommand());
@@ -150,7 +149,6 @@ public final class Main extends JavaPlugin{
         Objects.requireNonNull(getCommand("perks")).setExecutor(new PerkCommand(this));
         Objects.requireNonNull(getCommand("infobar")).setExecutor(new InfobarCommand(this));
         Objects.requireNonNull(getCommand("crate")).setExecutor(new SpawnArmorstandCommand());
-
     }
     public static Main getInstance(){
         return instance;

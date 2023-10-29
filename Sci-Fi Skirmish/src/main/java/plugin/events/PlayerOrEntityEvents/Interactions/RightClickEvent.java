@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
-import plugin.LootSystem.Loot;
+import plugin.cratesystem.Loot;
 import plugin.Main;
 import plugin.models.PlayerStats;
 import plugin.utils.CombatLogger;
@@ -36,7 +36,7 @@ public class RightClickEvent implements Listener{
     public void clickEvent(PlayerInteractEvent e){
         Player p = e.getPlayer();
 
-        if(p.getItemInHand().getItemMeta() == null | p.getItemInHand().getItemMeta().getLore() == null){
+        if(p.getItemInHand().getType().equals(Material.AIR)){
             return;
         }
 
@@ -116,10 +116,10 @@ public class RightClickEvent implements Listener{
         if(p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§x§5§A§D§D§2§D§ka§x§4§0§A§A§1§C§ka §8§l[§x§5§A§D§D§2§D§lK§x§5§8§C§5§2§5§ll§x§5§7§A§C§1§E§le§x§5§5§9§4§1§6§lb§x§4§E§9§B§1§8§lr§x§4§7§A§3§1§A§li§x§4§0§A§A§1§C§lg§8§l] §x§5§A§D§D§2§D§lP§x§5§9§C§D§2§8§le§x§5§8§B§D§2§3§li§x§5§7§A§C§1§E§ll§x§5§6§9§C§1§9§ls§x§5§3§9§6§1§7§le§x§4§E§9§B§1§8§ln§x§4§9§A§0§1§9§ld§x§4§5§A§5§1§B§le§x§4§0§A§A§1§C§lr §x§4§0§A§A§1§C§ka§x§5§A§D§D§2§D§ka") && e.getAction().isRightClick() && !Objects.equals(teleportCooldown.get(p.getUniqueId()), "teleport")){
             if(CombatLogger.isInCombat(p)){
                 p.teleport(Objects.requireNonNull(CombatLogger.isInCombatWith(p)));
-                p.setCooldown(Material.GREEN_CANDLE, 2400);
+                p.setCooldown(Material.GREEN_CANDLE, 1800);
                 p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 20, 1);
                 teleportCooldown.put(p.getUniqueId(), "teleport");
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> teleportCooldown.remove(p.getUniqueId(), "teleport"), 20 * 120);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> teleportCooldown.remove(p.getUniqueId(), "teleport"), 20 * 90);
             }else{
                 p.sendActionBar("§cDu befindest dich nicht im Kampf!");
                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 20, 1);

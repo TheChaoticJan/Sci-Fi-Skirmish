@@ -16,7 +16,7 @@ import plugin.Main;
 import plugin.events.BlockEvents.BlockEvents;
 import plugin.models.PlayerStats;
 import plugin.utils.CombatLogger;
-import plugin.utils.Infobar.Actionbar;
+import plugin.infobar.Actionbar;
 import plugin.utils.essentials.Count;
 import plugin.utils.essentials.InventoryInteracts;
 

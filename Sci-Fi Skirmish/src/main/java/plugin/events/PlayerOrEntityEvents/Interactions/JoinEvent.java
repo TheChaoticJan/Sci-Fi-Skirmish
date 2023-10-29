@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import plugin.LootSystem.CrateEntities.Crates;
+import plugin.cratesystem.CrateEntities.Crates;
 import plugin.Main;
 import plugin.models.PlayerStats;
 import plugin.utils.Scores.ScoreBoardBuilder;
@@ -67,10 +67,11 @@ public class JoinEvent implements Listener {
                 Main.getInstance().getTablistManager().setTablist(p);
                 Main.getInstance().getTablistManager().setAllPlayerTeams();
 
-
             }catch (SQLException e){
                 e.printStackTrace();
             }
+
+
         }
     }
 

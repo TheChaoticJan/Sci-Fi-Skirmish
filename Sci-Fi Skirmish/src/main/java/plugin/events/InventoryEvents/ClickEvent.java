@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import plugin.utils.InventoryBuilder.SpecialItemInventory;
-import plugin.utils.ItemBuilder.Inventarteile;
+import plugin.utils.ItemBuilder.InventoryEssentials;
 import plugin.utils.ItemBuilder.WesternItems;
 
 import java.util.Objects;
@@ -55,7 +55,7 @@ public class ClickEvent implements Listener {
             }
                if(e.getCurrentItem().getItemMeta().hasItemFlag(ItemFlag.HIDE_ENCHANTS)){
 
-                 //WW-Kit
+                 //WW-Kit1
                  if(e.getCurrentItem().getItemMeta().hasEnchant(Enchantment.ARROW_INFINITE)) {
                      Inventory i = p.getInventory();
 
@@ -100,7 +100,7 @@ public class ClickEvent implements Listener {
                      i.setItem(34, Arrows);
                      i.setItem(35, Arrows);
 
-                     i.setItem(8, Inventarteile.Baubloecke());
+                     i.setItem(8, InventoryEssentials.buildingBlocks());
                      Objects.requireNonNull(i.getItem(8)).setAmount(32);
 
                      i.setItem(0, WesternItems.Schwert(p));

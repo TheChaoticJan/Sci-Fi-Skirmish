@@ -31,8 +31,6 @@ public class TablistManager{
 
     public void setPlayerTeams(Player player){
 
-
-
         Scoreboard scoreboard = player.getScoreboard();
 
         Team players = scoreboard.getTeam("bplayers");

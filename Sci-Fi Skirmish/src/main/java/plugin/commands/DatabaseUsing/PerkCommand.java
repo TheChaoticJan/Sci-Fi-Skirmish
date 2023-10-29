@@ -34,7 +34,7 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
                     this.plugin.getDatabase().createPlayerStats(stats);
                 }
 
-                p.openInventory(PerkInventories.Overview(p, stats));
+                p.openInventory(PerkInventories.overview(p, stats));
 
             }catch (SQLException e){
                 e.printStackTrace();

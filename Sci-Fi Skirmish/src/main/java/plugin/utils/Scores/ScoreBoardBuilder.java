@@ -1,9 +1,9 @@
 package plugin.utils.Scores;
 
-import plugin.models.PlayerStats;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
+import plugin.models.PlayerStats;
 import plugin.utils.CombatLogger;
 
 public class ScoreBoardBuilder {
@@ -40,7 +40,7 @@ public class ScoreBoardBuilder {
         Score score9 = objective.getScore("§i   §8ᐅ§d " + stats.getUwu() + " ♛");
         Score score10 = objective.getScore("§j  ");
         Score score13 = objective.getScore("§k §8· §7K/D:");
-        Score score14 = objective.getScore("§l   §8ᐅ§c " + Math.round(kd) + " ⚔");
+        Score score14 = objective.getScore("§l  §8ᐅ§c " + Math.round(kd) + " ⚔");
         Score score15 = objective.getScore("§p");
         Score score11 = objective.getScore("§q    §8[§aNicht in Combat§8]");
         if(CombatLogger.isInCombat(p)){

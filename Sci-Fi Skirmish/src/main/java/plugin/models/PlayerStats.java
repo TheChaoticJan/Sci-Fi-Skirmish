@@ -2,6 +2,8 @@ package plugin.models;
 
 //perk1, perk2, perk3, perk4, perk5
 
+import java.util.UUID;
+
 public class PlayerStats {
     private String uuid;
     private String name;
@@ -51,6 +53,9 @@ public class PlayerStats {
         this.infobar1 = infobar1;
         this.infobar2 = infobar2;
         this.infobar3 = infobar3;
+    }
+
+    public PlayerStats(UUID uniqueId) {
     }
 
     public int getInfobar1() {
