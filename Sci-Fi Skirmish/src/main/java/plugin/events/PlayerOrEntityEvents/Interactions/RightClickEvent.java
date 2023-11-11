@@ -1,18 +1,17 @@
 package plugin.events.PlayerOrEntityEvents.Interactions;
 
 import com.destroystokyo.paper.Title;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
-import plugin.cratesystem.Loot;
+import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
+import plugin.cratesystem.Loot;
 import plugin.models.PlayerStats;
 import plugin.utils.CombatLogger;
+import plugin.utils.InventoryBuilder.SelectCandleInventory;
 import plugin.utils.essentials.InventoryInteracts;
 
 import java.sql.SQLException;
@@ -30,6 +29,7 @@ public class RightClickEvent implements Listener{
     public HashMap<UUID, String> healCooldown = new HashMap<>();
     public HashMap<UUID, String> crateCooldown = new HashMap<>();
     public HashMap<UUID, String> teleportCooldown = new HashMap<>();
+    public HashMap<UUID, String> lockCooldown = new HashMap<>();
     Main plugin;
 
     @EventHandler
@@ -40,7 +40,7 @@ public class RightClickEvent implements Listener{
             return;
         }
 
-        if(p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§x§D§D§2§D§2§D§ka§x§A§A§7§8§1§C§ka §8§l[§x§D§D§2§D§2§D§lE§x§C§8§3§E§2§6§lx§x§B§3§4§F§2§0§lp§x§9§E§6§0§1§9§ll§x§9§7§6§A§1§7§lo§x§9§D§6§F§1§9§ls§x§A§4§7§3§1§A§li§x§A§A§7§8§1§C§lv§8§l] §x§F§F§0§0§4§8§lZ§x§F§3§0§E§4§1§lü§x§E§7§1§C§3§A§ln§x§D§B§2§A§3§3§ld§x§C§F§3§9§2§C§lk§x§C§2§4§7§2§4§le§x§B§6§5§5§1§D§lr§x§A§A§6§3§1§6§lz§x§9§E§7§1§0§F§le §x§A§A§7§8§1§C§ka§x§D§D§2§D§2§D§ka") && e.getAction().isRightClick() && !Objects.equals(jumpCooldown.get(p.getUniqueId()), "jump")){
+        if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.ORANGE_CANDLE) && e.getAction().isRightClick() && !Objects.equals(jumpCooldown.get(p.getUniqueId()), "jump") && !p.isSneaking()){
             p.setVelocity(p.getLocation().getDirection().add(p.getLocation().getDirection().multiply(0.7).setY(0.2)));
             jumpCooldown.put(p.getUniqueId(), "jump");
             p.setCooldown(Material.ORANGE_CANDLE, 100);
@@ -48,22 +48,61 @@ public class RightClickEvent implements Listener{
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> jumpCooldown.remove(p.getUniqueId(), "jump"), 20 * 5 );
         }
+
+        if(p.isSneaking() && p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "special")) && e.getAction().isRightClick()){ //&& !teleportCooldown.containsKey(p.getUniqueId()) && !jumpCooldown.containsKey(p.getUniqueId()) && !healCooldown.containsKey(p.getUniqueId()) && !crateCooldown.containsKey(p.getUniqueId())
+            p.openInventory(SelectCandleInventory.selectCandle(p, p.getItemInHand().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "candle"), PersistentDataType.STRING)));
+        }
+        
         try {
             PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
 
             if (stats == null) {
 
-                stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
+                stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
 
                 this.plugin.getDatabase().createPlayerStats(stats);
 
+            }
+
+            if(p.getItemInHand().getType().equals(Material.DIAMOND_SWORD) && e.getAction().isRightClick() && CombatLogger.isInCombat(p) && stats.getPerk6() && !lockCooldown.containsKey(p.getUniqueId())){
+                Player victim = CombatLogger.isInCombatWith(p);
+                victim.setCooldown(Material.ENDER_PEARL, 200);
+                victim.setCooldown(Material.COBWEB, 200);
+                victim.setCooldown(Material.BOW, 200);
+                victim.setCooldown(Material.FISHING_ROD, 200);
+                victim.setCooldown(Material.TNT, 200);
+                victim.setCooldown(Material.EXPERIENCE_BOTTLE, 200);
+                victim.setCooldown(Material.SANDSTONE, 200);
+                if(victim.getCooldown(Material.ORANGE_CANDLE) == 0){
+                    victim.setCooldown(Material.ORANGE_CANDLE, 200);
+                    jumpCooldown.put(p.getUniqueId(), "jump");
+                }
+                if(victim.getCooldown(Material.BLUE_CANDLE) == 0){
+                    victim.setCooldown(Material.BLUE_CANDLE, 200);
+                    crateCooldown.put(victim.getUniqueId(), "crate");
+                }
+                if(victim.getCooldown(Material.GREEN_CANDLE) == 0){
+                    victim.setCooldown(Material.GREEN_CANDLE, 200);
+                    teleportCooldown.put(victim.getUniqueId(), "teleport");
+                }
+                if(victim.getCooldown(Material.YELLOW_CANDLE) == 0){
+                    victim.setCooldown(Material.YELLOW_CANDLE, 200);
+                    healCooldown.put(victim.getUniqueId(), "heal");
+                }
+                p.setCooldown(Material.DIAMOND_SWORD, 1200);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> jumpCooldown.remove(victim.getUniqueId(), "jump"), 20 * 10 );
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> crateCooldown.remove(victim.getUniqueId(), "crate"), 20 * 10 );
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> teleportCooldown.remove(victim.getUniqueId(), "teleport"), 20 * 10 );
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> healCooldown.remove(victim.getUniqueId(), "heal"), 20 * 10);
+                lockCooldown.put(p.getUniqueId(), "lock");
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> lockCooldown.remove(p.getUniqueId(), "lock"), 20 * 60);
             }
 
             float x = p.getLocation().getBlockX();
             float y = p.getLocation().getBlockY();
             float z = p.getLocation().getBlockZ();
 
-            if (p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§x§C§6§0§B§F§9§ka§x§0§0§8§D§F§F§ka §8§l[§x§0§0§8§D§F§F§lS§x§1§E§5§5§F§F§lc§x§3§D§1§C§F§F§li§x§6§4§0§2§F§E§l-§x§9§5§0§7§F§B§lF§x§C§6§0§B§F§9§li§8§l] §x§0§0§4§4§F§C§lZ§x§0§E§3§C§F§9§la§x§1§B§3§5§F§6§lh§x§2§9§2§D§F§3§ll§x§3§6§2§5§F§0§lu§x§4§4§1§D§E§D§ln§x§5§1§1§6§E§A§lg§x§5§F§0§E§E§7§ls§x§6§C§0§6§E§4§lv§x§7§5§0§5§E§7§lo§x§7§E§0§5§E§B§lr§x§8§7§0§4§E§E§ls§x§9§0§0§3§F§2§lc§x§9§8§0§2§F§5§lh§x§A§1§0§2§F§8§lu§x§A§A§0§1§F§C§ls§x§B§3§0§0§F§F§ls §x§0§0§8§D§F§F§ka§x§C§6§0§B§F§9§ka") && e.getAction().isRightClick() && !Objects.equals(crateCooldown.get(p.getUniqueId()), "crate")) {
+            if (p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.BLUE_CANDLE) && e.getAction().isRightClick() && !Objects.equals(crateCooldown.get(p.getUniqueId()), "crate") && !p.isSneaking()) {
                 int rarity = (int) (Math.random() * 100 + 1);
                 crateCooldown.put(p.getUniqueId(), "crate");
                 p.setCooldown(Material.BLUE_CANDLE, 6000);
@@ -103,7 +142,7 @@ public class RightClickEvent implements Listener{
             exception.printStackTrace();
         }
 
-        if(p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§x§E§B§D§7§7§B§ka§x§B§E§D§5§5§6§ka §8§l[§x§E§B§D§7§7§B§lE§x§E§5§D§7§7§6§lr§x§D§E§D§6§7§0§lf§x§D§8§D§6§6§B§la§x§D§1§D§6§6§6§lh§x§C§B§D§6§6§1§lr§x§C§4§D§5§5§B§le§x§B§E§D§5§5§6§ln§8§l] §x§E§4§E§1§7§0§lW§x§D§D§D§F§6§D§lu§x§D§6§D§D§6§9§ln§x§C§F§D§B§6§6§ld§x§C§8§D§9§6§2§le§x§C§1§D§8§5§F§lr§x§B§9§D§6§5§C§lk§x§B§2§D§4§5§8§le§x§A§B§D§2§5§5§lr§x§A§4§D§0§5§1§lz§x§9§D§C§E§4§E§le §x§B§E§D§5§5§6§ka§x§E§B§D§7§7§B§ka") && e.getAction().isRightClick() && !Objects.equals(healCooldown.get(p.getUniqueId()), "heal")){
+        if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.YELLOW_CANDLE) && e.getAction().isRightClick() && !Objects.equals(healCooldown.get(p.getUniqueId()), "heal") && !p.isSneaking()){
             healCooldown.put(p.getUniqueId(), "heal");
             InventoryInteracts.healArmorPieces(p, 15);
             p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 20, 1);
@@ -113,7 +152,7 @@ public class RightClickEvent implements Listener{
 
             }
 
-        if(p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§x§5§A§D§D§2§D§ka§x§4§0§A§A§1§C§ka §8§l[§x§5§A§D§D§2§D§lK§x§5§8§C§5§2§5§ll§x§5§7§A§C§1§E§le§x§5§5§9§4§1§6§lb§x§4§E§9§B§1§8§lr§x§4§7§A§3§1§A§li§x§4§0§A§A§1§C§lg§8§l] §x§5§A§D§D§2§D§lP§x§5§9§C§D§2§8§le§x§5§8§B§D§2§3§li§x§5§7§A§C§1§E§ll§x§5§6§9§C§1§9§ls§x§5§3§9§6§1§7§le§x§4§E§9§B§1§8§ln§x§4§9§A§0§1§9§ld§x§4§5§A§5§1§B§le§x§4§0§A§A§1§C§lr §x§4§0§A§A§1§C§ka§x§5§A§D§D§2§D§ka") && e.getAction().isRightClick() && !Objects.equals(teleportCooldown.get(p.getUniqueId()), "teleport")){
+        if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.GREEN_CANDLE) && e.getAction().isRightClick() && !Objects.equals(teleportCooldown.get(p.getUniqueId()), "teleport") && !p.isSneaking()){
             if(CombatLogger.isInCombat(p)){
                 p.teleport(Objects.requireNonNull(CombatLogger.isInCombatWith(p)));
                 p.setCooldown(Material.GREEN_CANDLE, 1800);

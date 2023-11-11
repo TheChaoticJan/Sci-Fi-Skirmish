@@ -30,6 +30,8 @@ public class JoinEvent implements Listener {
 
         Player p = event.getPlayer();
 
+        event.setJoinMessage(null);
+
         for (int i = 0; i < plugin.VanishList.size(); i++) {
             if (!p.isOp()) {
 
@@ -55,7 +57,7 @@ public class JoinEvent implements Listener {
 
                 if(stats == null){
 
-                    stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "Spieler", 0, 0, 0,0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
+                    stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "Spieler", 0, 0, 0,0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
 
                     this.plugin.getDatabase().createPlayerStats(stats);
 

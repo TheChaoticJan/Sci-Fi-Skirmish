@@ -231,7 +231,7 @@ public class Loot {
         mythicDrops.add(Drop10);
         ItemStack Drop11 = new ItemStack(Material.COBWEB, 12);
         mythicDrops.add(Drop11);
-
+        ItemStack Drop12 = new ItemStack(Material.GRAY_CANDLE);
 
         return new ItemStack(mythicDrops.get(new Random().nextInt(mythicDrops.size())));
     }

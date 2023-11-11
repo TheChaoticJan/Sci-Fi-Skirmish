@@ -24,13 +24,14 @@ public class PlayerStats {
     private Boolean perk3;
     private Boolean perk4;
     private Boolean perk5;
+    private Boolean perk6;
     private int infobar1;
     private int infobar2;
     private int infobar3;
 
 
 
-    public PlayerStats(String uuid, String name, String rank, int xp, long uwu, int deaths, int kills, int blocks_placed, int common_crates, int uncommon_crates, int epic_crates, int rare_crates, int mythic_crates, String clan, Boolean perk1, Boolean perk2, Boolean perk3, Boolean perk4, Boolean perk5, int infobar1, int infobar2, int infobar3) {
+    public PlayerStats(String uuid, String name, String rank, int xp, long uwu, int deaths, int kills, int blocks_placed, int common_crates, int uncommon_crates, int epic_crates, int rare_crates, int mythic_crates, String clan, Boolean perk1, Boolean perk2, Boolean perk3, Boolean perk4, Boolean perk5, Boolean perk6, int infobar1, int infobar2, int infobar3) {
         this.uuid = uuid;
         this.name = name;
         this.rank = rank;
@@ -50,6 +51,7 @@ public class PlayerStats {
         this.perk3 = perk3;
         this.perk4 = perk4;
         this.perk5 = perk5;
+        this.perk6 = perk6;
         this.infobar1 = infobar1;
         this.infobar2 = infobar2;
         this.infobar3 = infobar3;
@@ -234,6 +236,11 @@ public class PlayerStats {
         this.perk5 = perk5;
     }
 
+    public Boolean getPerk6() {
+        return perk6;
+    }
 
-
+    public void setPerk6(Boolean perk6) {
+        this.perk5 = perk6;
+    }
 }

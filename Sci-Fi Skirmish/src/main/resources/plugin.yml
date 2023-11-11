@@ -41,6 +41,8 @@ commands:
   crate:
     aliases: "spawnarmorstand"
     permission: permission.mod
+  smithingtable:
+    aliases: 'st'
 permissions:
   permission.mod:
     default: op

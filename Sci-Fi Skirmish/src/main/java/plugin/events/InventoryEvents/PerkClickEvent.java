@@ -25,7 +25,7 @@ public class PerkClickEvent implements Listener{
     Main plugin;
     @EventHandler
     public void perkClickEvent(InventoryClickEvent event){
-        if(event.getCurrentItem().getType().equals(Material.AIR)){
+        if(event.getCurrentItem() == null || event.getCurrentItem().getType().equals(Material.AIR)){
             return;
         }
         try {
@@ -35,6 +35,7 @@ public class PerkClickEvent implements Listener{
                 if(Objects.requireNonNull(event.getCurrentItem()).getItemMeta().getDisplayName().equals("§6§lKaufen?")) {
                     player.openInventory(PerkInventories.confirmBuy(player, stats, event.getCurrentItem()));
                 }
+                event.setCancelled(true);
             }
             if(event.getView().getTitle().equalsIgnoreCase("§c§lPerk kaufen?")){
                 if(event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cZurück")){
@@ -72,8 +73,8 @@ public class PerkClickEvent implements Listener{
                         player.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, player));
                     }
                 }
+                event.setCancelled(true);
             }
-            event.setCancelled(true);
         }catch (SQLException e){
             e.printStackTrace();
         }

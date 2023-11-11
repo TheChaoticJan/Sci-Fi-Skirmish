@@ -1,10 +1,5 @@
 package plugin.commands.InventoryCommands.GUIs;
 
-import plugin.utils.InventoryBuilder.Rezepte.ErfahrenRezeptInventare;
-import plugin.utils.InventoryBuilder.Rezepte.ExplosivRezeptInventare;
-import plugin.utils.InventoryBuilder.Rezepte.KlebrigRezeptInventare;
-import plugin.utils.InventoryBuilder.Rezepte.SciFiRezeptInventare;
-import plugin.utils.ItemBuilder.*;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,6 +8,11 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import plugin.utils.InventoryBuilder.Rezepte.ErfahrenRezeptInventare;
+import plugin.utils.InventoryBuilder.Rezepte.ExplosivRezeptInventare;
+import plugin.utils.InventoryBuilder.Rezepte.KlebrigRezeptInventare;
+import plugin.utils.InventoryBuilder.Rezepte.SciFiRezeptInventare;
+import plugin.utils.ItemBuilder.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,7 +38,7 @@ public class RezeptCommand implements CommandExecutor, TabCompleter {
                 case "Sci-Fi_Axt" ->
                         p.openInventory(SciFiRezeptInventare.Axt(p, null, SciFiItems.Axt()));
                 case "Sci-Fi_Zauberstab" ->
-                        p.openInventory(SciFiRezeptInventare.Zauberstab(p, null, SciFiItems.Zahlungsvorschuss()));
+                        p.openInventory(SciFiRezeptInventare.Zauberstab(p, null, Candles.crateCandle()));
                 case "Erfahrenfragment" ->
                         p.openInventory(ErfahrenRezeptInventare.Fragment(p, null, SpecialResources.ErfahrenFragment()));
                 case "Erfahrenbarren" ->
@@ -68,7 +68,7 @@ public class RezeptCommand implements CommandExecutor, TabCompleter {
                 case "Klebrig_Bogen" ->
                         p.openInventory(KlebrigRezeptInventare.Bogen(p, null, KlebrigItems.Bogen()));
                 case "Erfahren_Zauberstab" ->
-                        p.openInventory(ErfahrenRezeptInventare.Zauberstab(p, null, ErfahrenItems.Zauberstab()));
+                        p.openInventory(ErfahrenRezeptInventare.Zauberstab(p, null, Candles.healCandle()));
                 default -> {
                     p.sendMessage("§cDies ist kein Servereigenes Specialitem!");
                     p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 2, 1);

@@ -1,14 +1,13 @@
 package plugin.events.InventoryEvents.Rezepte;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import plugin.utils.InventoryBuilder.Rezepte.ErfahrenRezeptInventare;
-import plugin.utils.InventoryBuilder.Rezepte.ExplosivRezeptInventare;
-import plugin.utils.InventoryBuilder.Rezepte.KlebrigRezeptInventare;
-import plugin.utils.InventoryBuilder.Rezepte.SciFiRezeptInventare;
+import plugin.Main;
+import plugin.utils.InventoryBuilder.Rezepte.*;
 
 import java.util.Objects;
 
@@ -101,9 +100,10 @@ public class RezeptClickEvent implements Listener{
                 p.openInventory(KlebrigRezeptInventare.Bogen(p, e, null));
             }
 
-            if(e.getCurrentItem().getType().equals(Material.BLAZE_ROD)){
-                p.openInventory(ErfahrenRezeptInventare.Zauberstab(p, e, null));
+            if(e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "special"))){
+                p.openInventory(CandleRecipeInventories.specialCandleRecipe(p, e, null));
             }
+
 
             e.setCancelled(true);
         }

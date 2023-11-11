@@ -7,6 +7,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import plugin.utils.InventoryBuilder.RecipeInventory;
+import plugin.utils.ItemBuilder.Candles;
 import plugin.utils.ItemBuilder.SciFiItems;
 import plugin.utils.ItemBuilder.SpecialResources;
 
@@ -16,7 +17,7 @@ public class SciFiRezeptInventare {
         Inventory i = RecipeInventory.emptyInventory(p, e, a);
         i.setItem(12, SpecialResources.SciFiBarren());
         i.setItem(21, SpecialResources.SciFiBarren());
-        i.setItem(24, SciFiItems.Zahlungsvorschuss());
+        i.setItem(24, Candles.crateCandle());
         i.setItem(30, SpecialResources.SciFiBarren());
         return i;
     }

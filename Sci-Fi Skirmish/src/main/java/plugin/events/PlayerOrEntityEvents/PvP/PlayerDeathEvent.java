@@ -73,7 +73,7 @@ public class PlayerDeathEvent implements Listener{
 
                     if (stats == null) {
 
-                        stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "",0, 0, 1, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
+                        stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
 
                         this.plugin.getDatabase().createPlayerStats(stats);
 
@@ -86,29 +86,25 @@ public class PlayerDeathEvent implements Listener{
 
                     p.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, p));
 
-                }catch (SQLException e){
-                    e.printStackTrace();
-                }
 
-                try{
-                    PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getKiller().getUniqueId().toString());
+                    PlayerStats stats1 = this.plugin.getDatabase().findPlayerStatsByUUID(p.getKiller().getUniqueId().toString());
 
-                    if(stats == null){
+                    if(stats1 == null){
 
-                        stats = new PlayerStats(p.getKiller().getUniqueId().toString(), p.getKiller().getName(), "", 5, -2,0, 1, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
+                        stats1 = new PlayerStats(p.getKiller().getUniqueId().toString(), p.getKiller().getName(), "", 5, -2,0, 1, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
 
-                        this.plugin.getDatabase().createPlayerStats(stats);
+                        this.plugin.getDatabase().createPlayerStats(stats1);
 
                     }else {
 
-                        stats.setUwu(stats.getUwu() - 2);
-                        stats.setXp(stats.getXp() + 5);
-                        stats.setKills(stats.getKills() + 1);
+                        stats1.setUwu(stats1.getUwu() - 2);
+                        stats1.setXp(stats1.getXp() + 5);
+                        stats1.setKills(stats1.getKills() + 1);
 
-                        this.plugin.getDatabase().updatePlayerStats(stats);
+                        this.plugin.getDatabase().updatePlayerStats(stats1);
                     }
 
-                        p.getKiller().setScoreboard(ScoreBoardBuilder.Scoreboard(stats, p));
+                        p.getKiller().setScoreboard(ScoreBoardBuilder.Scoreboard(stats1, p.getKiller()));
 
 
                 }catch (SQLException e){

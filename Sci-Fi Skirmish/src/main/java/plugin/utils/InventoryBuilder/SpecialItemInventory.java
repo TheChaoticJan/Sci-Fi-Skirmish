@@ -13,19 +13,9 @@ public class SpecialItemInventory {
 
     public static Inventory inventory(Player p, String name){
         Inventory rezepte = Bukkit.createInventory(p,54 , name);
-        p.sendMessage(SciFiItems.Schwert().displayName());
-
-        for(int i = 0; i <= 9; i++){
+        
+        for(int i = 4; i <= 49; i = i + 9){
             rezepte.setItem(i, InventoryEssentials.glass());
-        }
-        rezepte.setItem(17, InventoryEssentials.glass());
-        rezepte.setItem(18, InventoryEssentials.glass());
-        rezepte.setItem(26, InventoryEssentials.glass());
-        rezepte.setItem(27, InventoryEssentials.glass());
-        rezepte.setItem(35, InventoryEssentials.glass());
-        rezepte.setItem(36, InventoryEssentials.glass());
-        for(int i2 = 44; i2 <= 53; i2++){
-            rezepte.setItem(i2, InventoryEssentials.glass());
         }
 
         //Sci-Fi
@@ -34,13 +24,12 @@ public class SpecialItemInventory {
         SciGlassMeta.setDisplayName("§eSci-Fi");
         SciGlassMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         SciGlass.setItemMeta(SciGlassMeta);
-        rezepte.setItem(10, SciGlass);
-        rezepte.setItem(11, SpecialResources.SciFiFragment());
-        rezepte.setItem(12, SpecialResources.SciFiBarren());
-        rezepte.setItem(13, SciFiItems.Schwert());
-        rezepte.setItem(14, SciFiItems.Axt());
-        rezepte.setItem(15, SciFiItems.Bogen());
-        rezepte.setItem(16, SciFiItems.Zahlungsvorschuss());
+        rezepte.setItem(0, SciGlass);
+        rezepte.setItem(9, SpecialResources.SciFiFragment());
+        rezepte.setItem(18, SpecialResources.SciFiBarren());
+        rezepte.setItem(27, SciFiItems.Schwert());
+        rezepte.setItem(36, SciFiItems.Axt());
+        rezepte.setItem(45, SciFiItems.Bogen());
 
         //Erfahren
         ItemStack EGlass = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
@@ -48,13 +37,12 @@ public class SpecialItemInventory {
         EMeta.setDisplayName("§eErfahren");
         EMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         EGlass.setItemMeta(EMeta);
-        rezepte.setItem(19, EGlass);
-        rezepte.setItem(20, SpecialResources.ErfahrenFragment());
-        rezepte.setItem(21, SpecialResources.ErfahrenBarren());
-        rezepte.setItem(22, ErfahrenItems.Schwert());
-        rezepte.setItem(23, ErfahrenItems.Axt());
-        rezepte.setItem(24, ErfahrenItems.Bogen());
-        rezepte.setItem(25, ErfahrenItems.Zauberstab());
+        rezepte.setItem(1, EGlass);
+        rezepte.setItem(10, SpecialResources.ErfahrenFragment());
+        rezepte.setItem(19, SpecialResources.ErfahrenBarren());
+        rezepte.setItem(28, ErfahrenItems.Schwert());
+        rezepte.setItem(37, ErfahrenItems.Axt());
+        rezepte.setItem(46, ErfahrenItems.Bogen());
 
         //Explosiv
         ItemStack ExGlass = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
@@ -62,12 +50,11 @@ public class SpecialItemInventory {
         ExMeta.setDisplayName("§eExplosiv");
         ExMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         ExGlass.setItemMeta(ExMeta);
-        rezepte.setItem(28, ExGlass);
-        rezepte.setItem(29, SpecialResources.ExplosivPuder());
-        rezepte.setItem(30, SpecialResources.ExplosivBarren());
-        rezepte.setItem(31, ExplosivItems.Spitzhacke());
-        rezepte.setItem(32, ExplosivItems.Angel());
-        rezepte.setItem(34, ExplosivItems.Zuendkerze());
+        rezepte.setItem(2, ExGlass);
+        rezepte.setItem(11, SpecialResources.ExplosivPuder());
+        rezepte.setItem(20, SpecialResources.ExplosivBarren());
+        rezepte.setItem(29, ExplosivItems.Spitzhacke());
+        rezepte.setItem(38, ExplosivItems.Angel());
 
         //Klebrig
         ItemStack KGlass = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
@@ -75,13 +62,20 @@ public class SpecialItemInventory {
         KMeta.setDisplayName("§eKlebrig");
         KMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         KGlass.setItemMeta(KMeta);
-        rezepte.setItem(37, KGlass);
-        rezepte.setItem(38, SpecialResources.KlebrigFragment());
-        rezepte.setItem(39, SpecialResources.KlebrigBarren());
-        rezepte.setItem(40, KlebrigItems.Schwert());
-        rezepte.setItem(41, KlebrigItems.Angel());
-        rezepte.setItem(42, KlebrigItems.Bogen());
-        rezepte.setItem(43, KlebrigItems.Peilsender());
+        rezepte.setItem(3, KGlass);
+        rezepte.setItem(12, SpecialResources.KlebrigFragment());
+        rezepte.setItem(21, SpecialResources.KlebrigBarren());
+        rezepte.setItem(30, KlebrigItems.Schwert());
+        rezepte.setItem(39, KlebrigItems.Angel());
+        rezepte.setItem(48, KlebrigItems.Bogen());
+
+        //Candles
+        rezepte.setItem(5, Candles.emptyCandle());
+        rezepte.setItem(14, Candles.crateCandle());
+        rezepte.setItem(23, Candles.healCandle());
+        rezepte.setItem(32, Candles.boostCandle());
+        rezepte.setItem(41, Candles.teleportCandle());
+        rezepte.setItem(50, Candles.superCandle());
 
         p.openInventory(rezepte);
         return rezepte;

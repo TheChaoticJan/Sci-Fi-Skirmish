@@ -1,11 +1,11 @@
 package plugin.utils.Recipes;
 
-import plugin.Main;
-import plugin.utils.ItemBuilder.SciFiItems;
-import plugin.utils.ItemBuilder.SpecialResources;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ShapedRecipe;
+import plugin.Main;
+import plugin.utils.ItemBuilder.SciFiItems;
+import plugin.utils.ItemBuilder.SpecialResources;
 
 public class SciFiRezepte {
 
@@ -40,14 +40,6 @@ public class SciFiRezepte {
         recipe4.setIngredient('F', SpecialResources.SciFiBarren());
         recipe4.setIngredient('S', Material.STICK);
         return recipe4;
-    }
-
-    public static ShapedRecipe Recipe5(){
-        ShapedRecipe recipe5 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFiZauberstab"), SciFiItems.Zahlungsvorschuss());
-        recipe5.shape("xFx", "xFx", "xFx");
-        recipe5.setIngredient('x', Material.AIR);
-        recipe5.setIngredient('F', SpecialResources.SciFiBarren());
-        return recipe5;
     }
 
     public static ShapedRecipe Recipe6(){

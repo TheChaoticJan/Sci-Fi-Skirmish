@@ -1,18 +1,25 @@
 package plugin.utils.ItemBuilder;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
+import plugin.Main;
 
 public class SpecialResources {
+
+    private static final NamespacedKey key = new NamespacedKey(Main.getInstance(), "material");
+
     public static ItemStack ErfahrenBarren(){
         ItemStack SuperGoldBlock = new ItemStack(Material.GOLD_INGOT);
         ItemMeta SuperGoldBlockMeta = SuperGoldBlock.getItemMeta();
         SuperGoldBlockMeta.setDisplayName("§x§F§F§E§2§5§9W§x§F§F§D§D§5§8e§x§F§F§D§7§5§8i§x§F§F§D§2§5§7s§x§F§F§C§D§5§6e§x§F§F§C§7§5§5n§x§F§F§C§2§5§5b§x§F§F§B§C§5§4a§x§F§F§B§7§5§3r§x§F§F§B§2§5§2r§x§F§F§A§C§5§2e§x§F§F§A§7§5§1n");
         SuperGoldBlockMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, false);
         SuperGoldBlockMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        SuperGoldBlockMeta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "gold");
         SuperGoldBlock.setItemMeta(SuperGoldBlockMeta);
         return SuperGoldBlock;
     }
@@ -33,6 +40,7 @@ public class SpecialResources {
         SuperGoldMeta.setDisplayName("§x§F§F§0§0§0§0E§x§F§6§0§3§0§1x§x§E§D§0§6§0§3p§x§E§4§0§9§0§4l§x§D§A§0§D§0§5o§x§D§1§1§0§0§7s§x§C§8§1§3§0§8i§x§B§F§1§6§0§9v§x§B§6§1§9§0§Ab§x§A§D§1§C§0§Ca§x§A§3§2§0§0§Dr§x§9§A§2§3§0§Er§x§9§1§2§6§1§0e§x§8§8§2§9§1§1n");
         SuperGoldMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, false);
         SuperGoldMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        SuperGoldMeta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "kelp");
         SuperGold.setItemMeta(SuperGoldMeta);
         return SuperGold;
     }
@@ -63,6 +71,7 @@ public class SpecialResources {
         SuperGoldMeta.setDisplayName("§x§0§0§F§F§1§1K§x§0§2§F§6§1§2l§x§0§5§E§D§1§2e§x§0§7§E§3§1§3b§x§0§A§D§A§1§4r§x§0§C§D§1§1§4i§x§0§E§C§8§1§5g§x§1§1§B§E§1§5e§x§1§3§B§5§1§6r §x§1§5§A§C§1§7K§x§1§8§A§3§1§7r§x§1§A§9§9§1§8i§x§1§D§9§0§1§9s§x§1§F§8§7§1§9t§x§2§1§7§E§1§Aa§x§2§4§7§4§1§Al§x§2§6§6§B§1§Bl");
         SuperGoldMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, false);
         SuperGoldMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        SuperGoldMeta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "emerald");
         SuperGold.setItemMeta(SuperGoldMeta);
         return SuperGold;
 
@@ -75,6 +84,7 @@ public class SpecialResources {
         SuperGoldBlockMeta.setDisplayName("§x§5§9§F§8§F§FS§x§5§8§F§2§F§Fc§x§5§8§E§C§F§Fi§x§5§7§E§6§F§F-§x§5§7§E§0§F§FF§x§5§6§D§A§F§Fi §x§5§5§D§4§F§FK§x§5§5§C§E§F§Fr§x§5§4§C§8§F§Fi§x§5§3§C§2§F§Fs§x§5§3§B§C§F§Ft§x§5§2§B§6§F§Fa§x§5§2§B§0§F§Fl§x§5§1§A§A§F§Fl");
         SuperGoldBlockMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, false);
         SuperGoldBlockMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        SuperGoldBlockMeta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "diamond");
         SuperGoldBlock.setItemMeta(SuperGoldBlockMeta);
         return SuperGoldBlock;
     }

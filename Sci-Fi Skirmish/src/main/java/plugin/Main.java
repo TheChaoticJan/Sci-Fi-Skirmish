@@ -3,9 +3,6 @@ package plugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.plugin.java.JavaPlugin;
-import plugin.cratesystem.CrateEntities.CrateDeathEvent;
-import plugin.cratesystem.CrateEntities.CrateHitEvent;
-import plugin.cratesystem.CrateEntities.Crates;
 import plugin.commands.DatabaseUsing.CrateStatsCommand;
 import plugin.commands.DatabaseUsing.PerkCommand;
 import plugin.commands.DatabaseUsing.TopCommand;
@@ -14,6 +11,7 @@ import plugin.commands.FunCommands.SignCommand;
 import plugin.commands.FunCommands.UwUCommand;
 import plugin.commands.InventoryCommands.CommonInventories.AnvilCommand;
 import plugin.commands.InventoryCommands.CommonInventories.EnderchestCommand;
+import plugin.commands.InventoryCommands.CommonInventories.SmithingTableCommand;
 import plugin.commands.InventoryCommands.CommonInventories.TrashCommand;
 import plugin.commands.InventoryCommands.GUIs.KitCommand;
 import plugin.commands.InventoryCommands.GUIs.RezeptCommand;
@@ -23,26 +21,24 @@ import plugin.commands.ModerationsCommands.InfoCommand;
 import plugin.commands.ModerationsCommands.InvseeCommand;
 import plugin.commands.ModerationsCommands.VanishCommand;
 import plugin.commands.QoLCommands.*;
+import plugin.cratesystem.CrateEntities.CrateDeathEvent;
+import plugin.cratesystem.CrateEntities.CrateHitEvent;
+import plugin.cratesystem.CrateEntities.Crates;
 import plugin.database.Database;
 import plugin.events.BlockEvents.BlockEvents;
 import plugin.events.ExplosionEvents.ExplodeEvent;
+import plugin.events.InventoryEvents.CandleClickEvent;
 import plugin.events.InventoryEvents.ClickEvent;
 import plugin.events.InventoryEvents.InfobarClick;
 import plugin.events.InventoryEvents.PerkClickEvent;
 import plugin.events.InventoryEvents.Rezepte.RezeptClickEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.ChatEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.DropEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.JoinEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.RightClickEvent;
+import plugin.events.PlayerOrEntityEvents.Interactions.*;
 import plugin.events.PlayerOrEntityEvents.PvP.PlayerDeathEvent;
 import plugin.events.PlayerOrEntityEvents.PvP.PlayerFishingEvent;
 import plugin.events.PlayerOrEntityEvents.PvP.PlayerGetHitEvent;
 import plugin.events.PlayerOrEntityEvents.PvP.ProjectileHitEvent;
 import plugin.infobar.InfobarCommand;
-import plugin.utils.Recipes.Erfahrenrezepte;
-import plugin.utils.Recipes.ExplosivRezepte;
-import plugin.utils.Recipes.KlebrigRezepte;
-import plugin.utils.Recipes.SciFiRezepte;
+import plugin.utils.Recipes.*;
 import plugin.utils.Scores.TablistManager;
 
 import java.sql.SQLException;
@@ -89,12 +85,10 @@ public final class Main extends JavaPlugin{
         Bukkit.addRecipe(Erfahrenrezepte.Recipe3());
         Bukkit.addRecipe(Erfahrenrezepte.Recipe4());
         Bukkit.addRecipe(Erfahrenrezepte.Recipe5());
-        Bukkit.addRecipe(Erfahrenrezepte.Recipe6());
         Bukkit.addRecipe(SciFiRezepte.Recipe1());
         Bukkit.addRecipe(SciFiRezepte.Recipe2());
         Bukkit.addRecipe(SciFiRezepte.Recipe3());
         Bukkit.addRecipe(SciFiRezepte.Recipe4());
-        Bukkit.addRecipe(SciFiRezepte.Recipe5());
         Bukkit.addRecipe(SciFiRezepte.Recipe6());
         Bukkit.addRecipe(KlebrigRezepte.Recipe1());
         Bukkit.addRecipe(KlebrigRezepte.Recipe2());
@@ -105,6 +99,11 @@ public final class Main extends JavaPlugin{
         Bukkit.addRecipe(ExplosivRezepte.Recipe2());
         Bukkit.addRecipe(ExplosivRezepte.Recipe3());
         Bukkit.addRecipe(ExplosivRezepte.Recipe4());
+        Bukkit.addRecipe(CandleRecipes.healCandle());
+        Bukkit.addRecipe(CandleRecipes.boostCandle());
+        Bukkit.addRecipe(CandleRecipes.crateCandle());
+        Bukkit.addRecipe(CandleRecipes.teleportCandle());
+        Bukkit.addRecipe(CandleRecipes.superRecipe());
 
         //events
         getServer().getPluginManager().registerEvents(new ClickEvent(), this);
@@ -123,6 +122,9 @@ public final class Main extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new CrateHitEvent(), this);
         getServer().getPluginManager().registerEvents(new InfobarClick(this), this);
         getServer().getPluginManager().registerEvents(new PerkClickEvent(this), this);
+        getServer().getPluginManager().registerEvents(new MoveEvent(this), this);
+        getServer().getPluginManager().registerEvents(new AnvilEvent(), this);
+        getServer().getPluginManager().registerEvents(new CandleClickEvent(), this);
 
         //commands
         Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCommand());
@@ -149,6 +151,7 @@ public final class Main extends JavaPlugin{
         Objects.requireNonNull(getCommand("perks")).setExecutor(new PerkCommand(this));
         Objects.requireNonNull(getCommand("infobar")).setExecutor(new InfobarCommand(this));
         Objects.requireNonNull(getCommand("crate")).setExecutor(new SpawnArmorstandCommand());
+        Objects.requireNonNull(getCommand("smithingtable")).setExecutor(new SmithingTableCommand());
     }
     public static Main getInstance(){
         return instance;

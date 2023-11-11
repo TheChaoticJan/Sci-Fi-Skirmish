@@ -55,7 +55,7 @@ public class ProjectileHitEvent implements Listener{
 
                         if (stats == null) {
 
-                            stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
+                            stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
 
                             this.plugin.getDatabase().createPlayerStats(stats);
                         }
@@ -66,7 +66,7 @@ public class ProjectileHitEvent implements Listener{
 
                         if (stats1 == null) {
 
-                            stats1 = new PlayerStats(d.getUniqueId().toString(), d.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
+                            stats1 = new PlayerStats(d.getUniqueId().toString(), d.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
 
                             this.plugin.getDatabase().createPlayerStats(stats1);
 
