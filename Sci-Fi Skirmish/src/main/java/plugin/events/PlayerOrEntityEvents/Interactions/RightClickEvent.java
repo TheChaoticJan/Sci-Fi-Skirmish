@@ -52,7 +52,7 @@ public class RightClickEvent implements Listener{
         if(p.isSneaking() && p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "special")) && e.getAction().isRightClick()){ //&& !teleportCooldown.containsKey(p.getUniqueId()) && !jumpCooldown.containsKey(p.getUniqueId()) && !healCooldown.containsKey(p.getUniqueId()) && !crateCooldown.containsKey(p.getUniqueId())
             p.openInventory(SelectCandleInventory.selectCandle(p, p.getItemInHand().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "candle"), PersistentDataType.STRING)));
         }
-        
+
         try {
             PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
 

@@ -36,28 +36,28 @@ public class CandleClickEvent implements Listener{
                     list.set(6, "   §7Aktueller Modus: §eErfahren");
                     player.getItemInHand().setType(Material.YELLOW_CANDLE);
                     player.closeInventory();
-                    player.sendActionBar("§7Ausgewählt ▸ §eErfahren");
+                    player.sendActionBar("§8Modus §7▸ §eErfahren");
                 }
                 case "boost" -> {
                     player.getItemInHand().getItemMeta().getPersistentDataContainer().set(key, PersistentDataType.STRING, "boost");
                     list.set(6, "   §7Aktueller Modus: §6Explosiv");
                     player.getItemInHand().setType(Material.ORANGE_CANDLE);
                     player.closeInventory();
-                    player.sendActionBar("§7Ausgewählt ▸ §6Explosiv");
+                    player.sendActionBar("§8Modus §7▸ §6Explosiv");
                 }
                 case "teleport" -> {
                     player.getItemInHand().getItemMeta().getPersistentDataContainer().set(key, PersistentDataType.STRING, "teleport");
                     list.set(6, "   §7Aktueller Modus: §2Klebrig");
                     player.getItemInHand().setType(Material.GREEN_CANDLE);
                     player.closeInventory();
-                    player.sendActionBar("§7Ausgewählt ▸ §2Klebrig");
+                    player.sendActionBar("§8Modus §7▸ §2Klebrig");
                 }
                 case "crate" -> {
                     player.getItemInHand().getItemMeta().getPersistentDataContainer().set(key, PersistentDataType.STRING, "crate");
                     list.set(6, "   §7Aktueller Modus: §5Sci-Fi");
                     player.getItemInHand().setType(Material.BLUE_CANDLE);
                     player.closeInventory();
-                    player.sendActionBar("§7Ausgewählt ▸ §5Sci-Fi");
+                    player.sendActionBar("§8Modus §7▸ §5Sci-Fi");
                 }
                 default -> {
                 }
