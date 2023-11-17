@@ -80,7 +80,7 @@ public class Candles {
 
         ItemStack Zauberstab = new ItemStack(Material.YELLOW_CANDLE);
         ItemMeta ZauberMeta = Zauberstab.getItemMeta();
-        ZauberMeta.setDisplayName("§x§E§B§D§7§7§B§ka§x§B§E§D§5§5§6§ka §8§l[§x§E§B§D§7§7§B§lE§x§E§5§D§7§7§6§lr§x§D§E§D§6§7§0§lf§x§D§8§D§6§6§B§la§x§D§1§D§6§6§6§lh§x§C§B§D§6§6§1§lr§x§C§4§D§5§5§B§le§x§B§E§D§5§5§6§ln§8§l] §x§E§4§E§1§7§0§lW§x§D§D§D§F§6§D§lu§x§D§6§D§D§6§9§ln§x§C§F§D§B§6§6§ld§x§C§8§D§9§6§2§le§x§C§1§D§8§5§F§lr§x§B§9§D§6§5§C§lk§x§B§2§D§4§5§8§le§x§A§B§D§2§5§5§lr§x§A§4§D§0§5§1§lz§x§9§D§C§E§4§E§le §x§B§E§D§5§5§6§ka§x§E§B§D§7§7§B§ka");
+        ZauberMeta.displayName(MiniMessage.miniMessage().deserialize("<i:false><obf><#EBD77B>a<#BED556>a</obf> <dark_gray><bold>[<gradient:#EBD77B:#BED556>Erfahren<dark_gray>] <gradient:#E4E170:#9DCE4E>Wunderkerze</bold> <obf><#BED556>a<#EBD77B>a"));
         ZauberMeta.addEnchant(Enchantment.DURABILITY, 1, true);
         ZauberMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         ZauberMeta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "heal");

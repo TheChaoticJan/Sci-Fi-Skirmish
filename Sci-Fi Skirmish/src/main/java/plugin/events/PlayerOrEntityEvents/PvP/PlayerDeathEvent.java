@@ -1,13 +1,14 @@
 package plugin.events.PlayerOrEntityEvents.PvP;
 
-import plugin.Main;
-import plugin.models.PlayerStats;
-import plugin.utils.Scores.ScoreBoardBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import plugin.Main;
+import plugin.models.PlayerStats;
+import plugin.utils.CombatLogger;
+import plugin.utils.Scores.ScoreBoardBuilder;
 
 import java.sql.SQLException;
 import java.util.Objects;
@@ -27,6 +28,10 @@ public class PlayerDeathEvent implements Listener{
         Player p = event.getPlayer();
         p.setHealth(20);
         p.setFoodLevel(20);
+
+        //removing both players from combat
+        CombatLogger.removeFromCombat(p);
+        CombatLogger.removeFromCombat(p.getKiller());
 
         //Creating Playerlocation
         int x = p.getLocation().getBlockX();
@@ -110,9 +115,6 @@ public class PlayerDeathEvent implements Listener{
                 }catch (SQLException e){
                     e.printStackTrace();
                 }
-
-
-
 
                 Location l = new Location(p.getWorld(), -1879, 101, 611);
                 p.teleport(l);

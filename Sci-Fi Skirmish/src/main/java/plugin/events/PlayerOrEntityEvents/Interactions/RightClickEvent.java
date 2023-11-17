@@ -75,7 +75,7 @@ public class RightClickEvent implements Listener{
                 victim.setCooldown(Material.SANDSTONE, 200);
                 if(victim.getCooldown(Material.ORANGE_CANDLE) == 0){
                     victim.setCooldown(Material.ORANGE_CANDLE, 200);
-                    jumpCooldown.put(p.getUniqueId(), "jump");
+                    jumpCooldown.put(victim.getUniqueId(), "jump");
                 }
                 if(victim.getCooldown(Material.BLUE_CANDLE) == 0){
                     victim.setCooldown(Material.BLUE_CANDLE, 200);

@@ -33,7 +33,7 @@ public class PerkClickEvent implements Listener{
            PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(String.valueOf(player.getUniqueId()));
             if (event.getView().getTitle().equalsIgnoreCase("§c§lPerks")) {
                 if(Objects.requireNonNull(event.getCurrentItem()).getItemMeta().getDisplayName().equals("§6§lKaufen?")) {
-                    player.openInventory(PerkInventories.confirmBuy(player, stats, event.getCurrentItem()));
+                    player.openInventory(PerkInventories.confirmBuy(player, event.getCurrentItem()));
                 }
                 event.setCancelled(true);
             }
@@ -62,6 +62,9 @@ public class PerkClickEvent implements Listener{
                         }else if(price == 1300){
                             stats.setPerk2(true);
                             perk = "§2Geübter Schütze";
+                        }else if(price == 2100) {
+                            stats.setPerk6(true);
+                            perk = "§6Taschendieb";
                         }else{
                             stats.setPerk3(true);
                             perk = "§4Risikobehaftet";

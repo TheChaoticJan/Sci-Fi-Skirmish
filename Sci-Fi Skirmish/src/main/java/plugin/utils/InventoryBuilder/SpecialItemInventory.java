@@ -77,6 +77,8 @@ public class SpecialItemInventory {
         rezepte.setItem(41, Candles.teleportCandle());
         rezepte.setItem(50, Candles.superCandle());
 
+        rezepte.setItem(6, LoadableItems.loadableXP());
+
         p.openInventory(rezepte);
         return rezepte;
 

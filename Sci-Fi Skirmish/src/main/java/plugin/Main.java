@@ -33,10 +33,7 @@ import plugin.events.InventoryEvents.InfobarClick;
 import plugin.events.InventoryEvents.PerkClickEvent;
 import plugin.events.InventoryEvents.Rezepte.RezeptClickEvent;
 import plugin.events.PlayerOrEntityEvents.Interactions.*;
-import plugin.events.PlayerOrEntityEvents.PvP.PlayerDeathEvent;
-import plugin.events.PlayerOrEntityEvents.PvP.PlayerFishingEvent;
-import plugin.events.PlayerOrEntityEvents.PvP.PlayerGetHitEvent;
-import plugin.events.PlayerOrEntityEvents.PvP.ProjectileHitEvent;
+import plugin.events.PlayerOrEntityEvents.PvP.*;
 import plugin.infobar.InfobarCommand;
 import plugin.utils.Recipes.*;
 import plugin.utils.Scores.TablistManager;
@@ -125,6 +122,7 @@ public final class Main extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new MoveEvent(this), this);
         getServer().getPluginManager().registerEvents(new AnvilEvent(), this);
         getServer().getPluginManager().registerEvents(new CandleClickEvent(), this);
+        getServer().getPluginManager().registerEvents(new PlayerRepairEvent(), this);
 
         //commands
         Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCommand());

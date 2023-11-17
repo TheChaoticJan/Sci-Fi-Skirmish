@@ -40,6 +40,26 @@ public class PerkInventories {
         return ArmorerPerk;
     }
 
+    private static ItemStack thievePerk(PlayerStats stats){
+
+        ItemStack ArmorerPerk = new ItemStack(Material.LEAD);
+        ItemMeta ArmorerMeta = ArmorerPerk.getItemMeta();
+        ArmorerMeta.setDisplayName("§6Taschendieb");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add("§7Als §aTaschendieb §7kannst du");
+        lore.add("§7alle §660 Sekunden §7mit Rechtsklick");
+        lore.add("§7 & einem §bDiamantschwert §7in der Hand");
+        lore.add("§7das Inventar deines §cGegners §7auf Cooldown setzen!");
+        ArmorerMeta.setLore(lore);
+        if (stats.getPerk6()) {
+            ArmorerMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+            ArmorerMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+        ArmorerPerk.setItemMeta(ArmorerMeta);
+        return ArmorerPerk;
+    }
+
 
     //Cobweb-Perk
     private static ItemStack cobwebPerk(PlayerStats stats) {
@@ -135,9 +155,7 @@ public class PerkInventories {
         ItemMeta meta = CS.getItemMeta();
         meta.setDisplayName("§c§l§oCooming Soon...");
         CS.setItemMeta(meta);
-        for(int i1 = 15; i1 <= 16; i1++){
-            Perks.setItem(i1, CS);
-        }
+        Perks.setItem(16, CS);
         Perks.setItem(17, InventoryEssentials.glass());
         Perks.setItem(18, InventoryEssentials.glass());
 
@@ -225,6 +243,18 @@ public class PerkInventories {
         }
         Perks.setItem(14, spyPerk(stats));
 
+        if(stats.getPerk6()){
+            Perks.setItem(24, buyed);
+        }else{
+            toBuyLore.set(4, "§7Perk: §6Taschendieb");
+            toBuyLore.set(5, "§7Kosten: §e2100 §6✧");
+            toBuyMeta.setLore(toBuyLore);
+            toBuyMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "price"), PersistentDataType.INTEGER, 2100);
+            toBuy.setItemMeta(toBuyMeta);
+            Perks.setItem(24, toBuy);
+        }
+        Perks.setItem(15, thievePerk(stats));
+
         for(int i2 = 26; i2 <= 35; i2++){
             Perks.setItem(i2, InventoryEssentials.glass());
         }
@@ -235,7 +265,7 @@ public class PerkInventories {
 
 
 
-    public static Inventory confirmBuy(Player p, PlayerStats stats, ItemStack price){
+    public static Inventory confirmBuy(Player p, ItemStack price){
 
         Component name = MiniMessage.miniMessage().deserialize("<rainbow>Kaufen?sfsdfsdfsfsdf</rainbow>");
         Inventory inventory = Bukkit.createInventory(p, 9, "§c§lPerk kaufen?");

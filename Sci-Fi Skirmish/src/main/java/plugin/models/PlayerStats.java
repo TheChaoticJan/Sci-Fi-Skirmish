@@ -241,6 +241,6 @@ public class PlayerStats {
     }
 
     public void setPerk6(Boolean perk6) {
-        this.perk5 = perk6;
+        this.perk6 = perk6;
     }
 }

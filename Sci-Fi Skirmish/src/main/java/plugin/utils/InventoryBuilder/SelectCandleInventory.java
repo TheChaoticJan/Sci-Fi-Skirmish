@@ -15,9 +15,15 @@ public class SelectCandleInventory {
 
     public static Inventory selectCandle(Player player, String currenttype){
 
-        Inventory inventory = Bukkit.createInventory(player, 9, MiniMessage.miniMessage().deserialize("<rainbow>Wähle den Kerzentyp aus!"));
+        Inventory inventory = Bukkit.createInventory(player, 27, MiniMessage.miniMessage().deserialize("<rainbow>Wähle den Kerzentyp aus!"));
 
-        for(int i = 0; i <=9; i = i + 2){
+        for(int i = 0; i <=9; i++){
+            inventory.setItem(i, InventoryEssentials.glass());
+        }
+        for(int i = 11; i <= 17; i = i + 2){
+            inventory.setItem(i, InventoryEssentials.glass());
+        }
+        for(int i = 18; i <=26; i++){
             inventory.setItem(i, InventoryEssentials.glass());
         }
 
@@ -29,7 +35,7 @@ public class SelectCandleInventory {
            Objects.requireNonNull(boostCandle.getItemMeta().getLore()).add("");
             Objects.requireNonNull(boostCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
         }
-        inventory.setItem(1, boostCandle);
+        inventory.setItem(10, boostCandle);
 
         ItemStack healCandle = Candles.healCandle();
         if(!currenttype.equals("heal")){
@@ -38,7 +44,7 @@ public class SelectCandleInventory {
             Objects.requireNonNull(healCandle.getItemMeta().getLore()).add("");
             Objects.requireNonNull(healCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
         }
-        inventory.setItem(3, healCandle);
+        inventory.setItem(12, healCandle);
 
         ItemStack crateCandle = Candles.crateCandle();
         if(!currenttype.equals("crate")){
@@ -47,7 +53,7 @@ public class SelectCandleInventory {
             Objects.requireNonNull(crateCandle.getItemMeta().getLore()).add("");
             Objects.requireNonNull(crateCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
         }
-        inventory.setItem(5, crateCandle);
+        inventory.setItem(14, crateCandle);
 
         ItemStack teleportCandle = Candles.teleportCandle();
         if(!currenttype.equals("teleport")){
@@ -56,7 +62,7 @@ public class SelectCandleInventory {
             Objects.requireNonNull(teleportCandle.getItemMeta().getLore()).add("");
             Objects.requireNonNull(teleportCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
         }
-        inventory.setItem(7, teleportCandle);
+        inventory.setItem(16, teleportCandle);
 
 
         return inventory;

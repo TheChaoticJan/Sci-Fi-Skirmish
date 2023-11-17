@@ -1,6 +1,6 @@
 package plugin.events.PlayerOrEntityEvents.Interactions;
 
-import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -8,8 +8,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import plugin.Main;
+import plugin.models.PlayerStats;
 import plugin.utils.CombatLogger;
+import plugin.utils.Text.Texts;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ChatEvent implements Listener{
@@ -39,7 +43,7 @@ public class ChatEvent implements Listener{
                 return;
             }
         }
-        event.setMessage(event.getMessage().replace("&", "§"));
+        event.setMessage(Texts.stringToMiniMessage(event.getMessage()));
 
         if(event.getMessage().startsWith("7")){
             Player p = event.getPlayer();
@@ -48,8 +52,30 @@ public class ChatEvent implements Listener{
             return;
         }
 
-        event.setCancelled(true);
-        Bukkit.broadcast(Component.text("§f" + event.getPlayer().getName() + " §7▸ §f" + event.getMessage()));
+        try {
+
+            Player player = event.getPlayer();
+
+            PlayerStats stats = Main.getInstance().getDatabase().findPlayerStatsByUUID(event.getPlayer().getUniqueId().toString());
+
+            if(stats == null){
+                stats = new PlayerStats(player.getUniqueId().toString(), player.getName(), "Spieler", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
+                Main.getInstance().getDatabase().createPlayerStats(stats);
+            }
+
+            event.setCancelled(true);
+            switch (stats.getRank()) {
+                default ->
+                        Bukkit.broadcast(MiniMessage.miniMessage().deserialize("<gradient:#FFE259:#FFA751>" + event.getPlayer().getName() + " <gray>▸ <white>" + event.getMessage()));
+                case "Moderator" ->
+                        Bukkit.broadcast(MiniMessage.miniMessage().deserialize("<gradient:#7034E6:#b76eec>" + event.getPlayer().getName() + " <gray>▸ <white>" + event.getMessage()));
+                case "Admin" ->
+                        Bukkit.broadcast(MiniMessage.miniMessage().deserialize("<gradient:#FF0000:#ad0d34>" + event.getPlayer().getName() + " <gray>▸ <white>" + event.getMessage()));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
     }
 }
