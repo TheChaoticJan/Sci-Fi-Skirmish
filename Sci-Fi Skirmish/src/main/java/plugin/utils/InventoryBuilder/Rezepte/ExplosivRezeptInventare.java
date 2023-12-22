@@ -8,7 +8,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import plugin.utils.InventoryBuilder.RecipeInventory;
-import plugin.utils.ItemBuilder.ExplosivItems;
+import plugin.utils.ItemBuilder.Explosiv;
 import plugin.utils.ItemBuilder.SpecialResources;
 
 public class ExplosivRezeptInventare {
@@ -56,7 +56,7 @@ public class ExplosivRezeptInventare {
         i.setItem(29, new ItemStack(Material.STICK));
         i.setItem(30, new ItemStack(Material.AIR));
         i.setItem(31, new ItemStack(SpecialResources.ErfahrenBarren()));
-        i.setItem(24, ExplosivItems.Angel());
+        i.setItem(24, Explosiv.Angel());
         return i;
     }
 
@@ -71,7 +71,7 @@ public class ExplosivRezeptInventare {
         i.setItem(29, new ItemStack(Material.AIR));
         i.setItem(30, new ItemStack(Material.STICK));
         i.setItem(31, new ItemStack(Material.AIR));
-        i.setItem(24, ExplosivItems.Spitzhacke());
+        i.setItem(24, Explosiv.Spitzhacke());
         return i;
     }
 }

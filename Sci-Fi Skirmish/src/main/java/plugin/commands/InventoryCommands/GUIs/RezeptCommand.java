@@ -54,9 +54,9 @@ public class RezeptCommand implements CommandExecutor, TabCompleter {
                 case "Explosivbarren" ->
                         p.openInventory(ExplosivRezeptInventare.Barren(p, null, SpecialResources.ExplosivBarren()));
                 case "Explosivbohrer" ->
-                        p.openInventory(ExplosivRezeptInventare.Picke(p, null, ExplosivItems.Spitzhacke()));
+                        p.openInventory(ExplosivRezeptInventare.Picke(p, null, Explosiv.Spitzhacke()));
                 case "Explosivangel" ->
-                        p.openInventory(ExplosivRezeptInventare.Angel(p, null, ExplosivItems.Angel()));
+                        p.openInventory(ExplosivRezeptInventare.Angel(p, null, Explosiv.Angel()));
                 case "Klebriger_Schleim" ->
                         p.openInventory(KlebrigRezeptInventare.Fragment(p, null, SpecialResources.KlebrigFragment()));
                 case "Klebriger_Kristall" ->

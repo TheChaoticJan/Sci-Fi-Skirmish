@@ -2,7 +2,6 @@ package plugin.utils.ItemBuilder;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -10,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ExplosivItems {
+public class Explosiv {
 
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
     private static final String date = "§8• §7§oGecraftet: §c§o" + simpleDateFormat.format(new Date());

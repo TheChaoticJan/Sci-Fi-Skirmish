@@ -53,8 +53,8 @@ public class SpecialItemInventory {
         rezepte.setItem(2, ExGlass);
         rezepte.setItem(11, SpecialResources.ExplosivPuder());
         rezepte.setItem(20, SpecialResources.ExplosivBarren());
-        rezepte.setItem(29, ExplosivItems.Spitzhacke());
-        rezepte.setItem(38, ExplosivItems.Angel());
+        rezepte.setItem(29, Explosiv.Spitzhacke());
+        rezepte.setItem(38, Explosiv.Angel());
 
         //Klebrig
         ItemStack KGlass = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
@@ -78,6 +78,10 @@ public class SpecialItemInventory {
         rezepte.setItem(50, Candles.superCandle());
 
         rezepte.setItem(6, LoadableItems.loadableXP());
+
+        //vampiric
+        rezepte.setItem(7, Vampirisch.ComboHoe(p));
+        rezepte.setItem(16, Vampirisch.EssenceBow(p));
 
         p.openInventory(rezepte);
         return rezepte;

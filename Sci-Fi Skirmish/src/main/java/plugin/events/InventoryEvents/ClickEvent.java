@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import plugin.utils.InventoryBuilder.SpecialItemInventory;
 import plugin.utils.ItemBuilder.InventoryEssentials;
-import plugin.utils.ItemBuilder.WesternItems;
+import plugin.utils.ItemBuilder.Western;
 
 import java.util.Objects;
 
@@ -103,14 +103,14 @@ public class ClickEvent implements Listener {
                      i.setItem(8, InventoryEssentials.buildingBlocks());
                      Objects.requireNonNull(i.getItem(8)).setAmount(32);
 
-                     i.setItem(0, WesternItems.Schwert(p));
-                     i.setItem(1, WesternItems.Rod(p));
-                     i.setItem(2, WesternItems.Bogen(p));
-                     i.setItem(7, WesternItems.Picke(p));
-                     i.setItem(39, WesternItems.Helmet(p));
-                     i.setItem(38, WesternItems.Chestplate(p));
-                     i.setItem(37, WesternItems.Leggings(p));
-                     i.setItem(36, WesternItems.Boots(p));
+                     i.setItem(0, Western.Schwert(p));
+                     i.setItem(1, Western.Rod(p));
+                     i.setItem(2, Western.Bogen(p));
+                     i.setItem(7, Western.Picke(p));
+                     i.setItem(39, Western.Helmet(p));
+                     i.setItem(38, Western.Chestplate(p));
+                     i.setItem(37, Western.Leggings(p));
+                     i.setItem(36, Western.Boots(p));
 
                      Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_ATTACK_SPEED)).setBaseValue(24);
                      p.closeInventory();

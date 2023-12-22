@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class WesternItems {
+public class Western {
 
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
     private static final String date = "§8• §7§oGefunden: §4§o" + simpleDateFormat.format(new Date());

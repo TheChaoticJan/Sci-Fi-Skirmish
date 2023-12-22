@@ -123,6 +123,7 @@ public final class Main extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new AnvilEvent(), this);
         getServer().getPluginManager().registerEvents(new CandleClickEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerRepairEvent(), this);
+        getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), this);
 
         //commands
         Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCommand());
